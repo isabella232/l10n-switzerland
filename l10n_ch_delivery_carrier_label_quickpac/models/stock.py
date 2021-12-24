@@ -18,7 +18,7 @@ class StockPicking(models.Model):
         company = user.company_id
 
         if package_ids:
-            packages = self.env['stock.quant.package'].browse(package_ids)
+            packages = self.env["stock.quant.package"].browse(package_ids)
         else:
             packages = self._get_packages_from_picking()
 
@@ -40,17 +40,15 @@ class StockPicking(models.Model):
         labels = []
         for item in res:
             label = item["value"]
-            filtered_packages = packages.filtered(
-                lambda p: p.name in label['item_id']
-            )
+            filtered_packages = packages.filtered(lambda p: p.name in label["item_id"])
             if "active_test" in ctx and ctx["active_test"]:
                 # ids mismatch when testing
                 package = packages[0]
             else:
                 package = filtered_packages[0]
-            package.parcel_tracking = label['tracking_number']
+            package.parcel_tracking = label["tracking_number"]
             info = info_from_label(label)
-            info['package_id'] = package.id
+            info["package_id"] = package.id
             labels.append(info)
         return labels
 
