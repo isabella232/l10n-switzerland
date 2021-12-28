@@ -3,7 +3,7 @@
 
 import logging
 
-from postfinanceb2binvoice import PostfinanceSvr
+from postfinanceb2binvoice import PostfinanceBillerSvr
 
 from odoo import fields, models
 
@@ -21,7 +21,23 @@ class PostfinanceService(models.Model):
     use_test_service = fields.Boolean(string="Testing", help="Target the test service")
     active = fields.Boolean(default=True)
 
+    def _init_service(self) -> None:
+
+        return PostfinanceBillerSvr(
+            "some",
+            user=self.username,
+            password=self.password,
+            test_service=self.use_test_service,
+        )
+
+    def test_connection(self):
+        pass
+
     def ping_service(self):
         """Ping the service"""
-        svr = PostfinanceSvr(self.use_test_service)
-        return svr.ping()
+        svr  = self._init_service()
+        return svr.ping(billerId=self.biller_id)
+
+    def get_biller_list(self):
+        svr  = self._init_service()
+        return svr.get_invoice_biller_list(billerId=self.biller_id)
