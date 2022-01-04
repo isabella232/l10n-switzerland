@@ -16,5 +16,5 @@ class AccountPaymentLine(models.Model):
     def invoice_reference_type2communication_type(self):
         res = super(AccountPaymentLine, self).\
             invoice_reference_type2communication_type()
-        res.update({'bvr': 'bvr', 'qrr': 'qrr'})
+        res.update({'bvr': 'bvr', 'QRR': 'qrr'})
         return res
