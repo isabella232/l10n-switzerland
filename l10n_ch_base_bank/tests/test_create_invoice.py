@@ -9,7 +9,10 @@ class TestCreateMove(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.company = cls.env.ref("base.main_company")
+        company = cls.company = cls.env.ref("base.main_company")
+        # This is to work with bank-payment/account_payment_partner
+        if hasattr(company, "force_blank_partner_bank_id"):
+            company.force_blank_partner_bank_id = False
         cls.partner = cls.env.ref("base.res_partner_12")
         bank = cls.env["res.bank"].create(
             {"name": "BCV", "bic": "BBRUBEBB", "clearing": "234234"}
