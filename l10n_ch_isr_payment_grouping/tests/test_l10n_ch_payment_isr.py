@@ -18,6 +18,10 @@ class PaymentISR(AccountTestInvoicingCommon):
     def setUpClass(cls):
         chart_template_ref = "l10n_ch.l10nch_chart_template"
         super().setUpClass(chart_template_ref=chart_template_ref)
+        # This is to work with bank-payment/account_payment_partner
+        company = cls.env.user.company_id
+        if hasattr(company, "force_blank_partner_bank_id"):
+            company.force_blank_partner_bank_id = False
 
     def create_supplier_invoice(
         self, supplier, ref, currency_to_use="base.CHF", inv_date=None

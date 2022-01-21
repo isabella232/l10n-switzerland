@@ -6,3 +6,4 @@ vcrpy==2.0.1
 xmlunittest==0.5.0
 odoo14-addon-delivery_carrier_label_batch @git+https://github.com/OCA/delivery-carrier@refs/pull/452/head#subdirectory=setup/delivery_carrier_label_batch
 odoo14-addon-stock_picking_batch_extended @git+https://github.com/OCA/stock-logistics-workflow@refs/pull/943/head#subdirectory=setup/stock_picking_batch_extended
+odoo14-addon-account_payment_partner @git+https://github.com/OCA/bank-payment@refs/pull/890/head#subdirectory=setup/account_payment_partner
