@@ -61,3 +61,11 @@ class BusinessDocumentImport(models.AbstractModel):
                 partner, iban, bic, chatter_msg, create_if_not_found
             )
             return bankaccount
+
+    @api.model
+    def invoice_already_exists(self, commercial_partner, parsed_inv):
+        if not parsed_inv.get('invoice_number'):
+            return False
+        return super(BusinessDocumentImport, self).invoice_already_exists(
+            commercial_partner=commercial_partner, parsed_inv=parsed_inv
+        )
