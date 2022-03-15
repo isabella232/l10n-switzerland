@@ -88,7 +88,7 @@ class TestInvoiceMessage(CommonCase):
                 "name": "INV_TEST_01",
                 "partner_id": self.customer.id,
                 "invoice_date_due": "2019-07-01",
-                "type": "out_invoice",
+                "move_type": "out_invoice",
                 "invoice_line_ids": [
                     (0, 0, {"name": "A little note", "display_type": "line_note"}),
                     (
@@ -106,8 +106,8 @@ class TestInvoiceMessage(CommonCase):
             }
         )
         invoice.action_post()
-        invoice.invoice_payment_ref = "1234567890"
-        invoice.invoice_partner_bank_id = self.partner_bank.id
+        invoice.payment_reference = "1234567890"
+        invoice.partner_bank_id = self.partner_bank.id
         # amount inside is not rounded
         self.assertEqual(invoice.amount_by_group[0][1], 0.35000000000000003)
         message = invoice.create_paynet_message()
