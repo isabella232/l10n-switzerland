@@ -18,8 +18,8 @@ import zeep  # isort:skip
 
 
 MODULE_PATH = get_module_root(os.path.dirname(__file__))
-INVOICE_TEMPLATE_2013 = "invoice-2013A.xml"
-INVOICE_TEMPLATE_2003 = "invoice-2003A.xml"
+INVOICE_TEMPLATE_2013 = "invoice-2013A.jinja"
+INVOICE_TEMPLATE_2003 = "invoice-2003A.jinja"
 TEMPLATE_DIR = [MODULE_PATH + "/messages"]
 
 DOCUMENT_TYPE = {"out_invoice": "EFD", "out_refund": "EGS"}
