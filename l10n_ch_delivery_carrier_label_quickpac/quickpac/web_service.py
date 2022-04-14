@@ -354,7 +354,8 @@ class QuickpacWebService(object):
         :return: Notification
         """
         communication = Communication(
-            email=picking.partner_id.email, mobile=picking.partner_id.mobile
+            email=picking.partner_id.email or None,
+            mobile=picking.partner_id.mobile or None,
         )
         notification = Notification(
             communication=communication,
