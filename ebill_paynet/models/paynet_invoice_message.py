@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 
 # Needs Jinja 2.10
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader
 
 from odoo import fields, models
 from odoo.modules.module import get_module_root
@@ -152,7 +152,7 @@ class PaynetInvoiceMessage(models.Model):
     def _get_jinja_env(self, template_dir):
         jinja_env = Environment(
             loader=FileSystemLoader(template_dir),
-            autoescape=select_autoescape(["xml"]),
+            autoescape=True,
         )
         # Force the truncate filter to be exact
         jinja_env.policies["truncate.leeway"] = 0
