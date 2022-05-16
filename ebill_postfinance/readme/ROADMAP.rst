@@ -8,11 +8,9 @@ ToDo
 Nice to have
 ------------
 
-* Add access to the related message list from an eBill contract.
 * Add a link to the failed job in the chatter message.
 * Add an action on partner to create a ebilling contract.
 * On contract if invoicing method is set add readonly button.
-
 
 
 
@@ -62,14 +60,3 @@ Traceback (most recent call last):
 ValueError: Invalid tag name '000'
 
 ```
-
-## Add tool bar on ebill contract
-
-* Add a smart button for the list of related invoice messages
-
-Done for setting the transmit method on the customer
-
-
-## Question on Postfinance api
-
-* Can I send the same transaction id multiple times (for the same invoice) ?

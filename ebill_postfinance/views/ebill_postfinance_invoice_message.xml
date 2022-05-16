@@ -58,7 +58,7 @@
         <field name="name">ebill.postfinance.invoice.message.tree</field>
         <field name="model">ebill.postfinance.invoice.message</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <tree create="false" default_order="submitted_on desc">
                 <field name="invoice_id" />
                 <field name="transaction_id" />
                 <field name="submitted_on" />

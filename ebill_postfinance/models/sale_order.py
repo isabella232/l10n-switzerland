@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     postfinance_ebill_client_order_ref = fields.Char(
-        compute="_compute_postfinance_client_order_ref"
+        compute="_compute_postfinance_ebill_client_order_ref"
     )
 
     @api.depends("client_order_ref")

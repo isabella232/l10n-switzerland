@@ -3,7 +3,7 @@
 <XML-FSCM-INVOICE-2003A>
   <INTERCHANGE>
     <IC-SENDER>
-      <Pid>52110726772852593</Pid>
+      <Pid>41101000001021209</Pid>
     </IC-SENDER>
     <IC-RECEIVER>
       <Pid>41010106799303734</Pid>
@@ -40,18 +40,18 @@
             <Date Format="CCYYMMDD">20190601</Date>
           </REFERENCE-DATE>
         </ORDER>
-        <DELIVERY-NOTE>
-          <REFERENCE-DATE>
-            <Reference-No>Picking Name</Reference-No>
+        <!-- <DELIVERY-NOTE> -->
+          <!-- <REFERENCE-DATE> -->
+            <!-- <Reference-No>Picking Name</Reference-No> -->
             <!-- <Date Format="CCYYMMDD">20190620</Date> -->
-          </REFERENCE-DATE>
-        </DELIVERY-NOTE>
+          <!-- </REFERENCE-DATE> -->
+        <!-- </DELIVERY-NOTE> -->
       </REFERENCE>
       <BILLER>
         <Tax-No>CHE-012.345.678</Tax-No>
         <Doc-Reference Type="QRR">1234567890</Doc-Reference>
         <PARTY-ID>
-          <Pid>52110726772852593</Pid>
+          <Pid>41101000001021209</Pid>
         </PARTY-ID>
         <NAME-ADDRESS Format="COM">
           <NAME>
@@ -202,7 +202,6 @@
         <Amount Currency="CHF">529.88</Amount>
       </INVOICE-AMOUNT>
       <VAT-AMOUNT Print-Status="25">
-        <!-- Should it not be the amount to be taxed ? -->
         <Amount Currency="CHF">37.88</Amount>
       </VAT-AMOUNT>
       <EXTENDED-AMOUNT Type="79">

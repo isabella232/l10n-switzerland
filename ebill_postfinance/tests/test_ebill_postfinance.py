@@ -11,7 +11,7 @@ class TestEbillPostfinance(CommonCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.transaction_id = "test-transaction-123"
-        cls.invoice_message = cls.invoice_1.create_postfinance_ebill()
+        cls.invoice_message = cls.invoice.create_postfinance_ebill()
 
     @recorder.use_cassette
     def test_ping_service(self):
