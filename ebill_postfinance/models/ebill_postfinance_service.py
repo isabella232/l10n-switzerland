@@ -7,7 +7,7 @@ import logging.config
 from odoo import fields, models
 from odoo.exceptions import UserError
 
-from ..lib.ebillservice import ebillservice
+from ..einvoicing_postfinance.einvoicing_postfinance import einvoicing_postfinance
 
 _logger = logging.getLogger(__name__)
 
@@ -75,7 +75,7 @@ class EbillPostfinanceService(models.Model):
     )
 
     def _get_service(self):
-        return ebillservice.EbillService(
+        return einvoicing_postfinance.EbillService(
             self.use_test_service, self.username, self.password, self.biller_id
         )
 
