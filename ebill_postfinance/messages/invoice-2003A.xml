@@ -44,19 +44,18 @@
         </ORDER>
         {%- endif %}
         {% endfor %}
-        {# TODO Needs the sale_stock module #}
-        {# {% for picking in invoice_lines.sale_line_ids.move_ids.mapped('picking_id')[:9] %} #}
-        {# {%- if picking.state != 'cancel' %} #}
-        {# <DELIVERY-NOTE> #}
-        {# <REFERENCE-DATE> #}
-        {# <Reference-No>{{ picking.name }}</Reference-No> #}
-        {# {%- if picking.date_done %} #}
-        {# <Date Format="CCYYMMDD">{{ format_date(picking.date_done) }}</Date> #}
-        {# {%- endif %} #}
-        {# </REFERENCE-DATE> #}
-        {# </DELIVERY-NOTE> #}
-        {# {%- endif %} #}
-        {# {% endfor %} #}
+        {% for picking in invoice_lines.sale_line_ids.move_ids.mapped('picking_id')[:9] %}
+        {%- if picking.state != 'cancel' %}
+        <DELIVERY-NOTE>
+          <REFERENCE-DATE>
+            <Reference-No>{{ picking.name }}</Reference-No>
+            {%- if picking.date_done %}
+              <Date Format="CCYYMMDD">{{ format_date(picking.date_done) }}</Date>
+            {%- endif %}
+          </REFERENCE-DATE>
+        </DELIVERY-NOTE>
+        {%- endif %}
+        {% endfor %}
         {% for ref in invoice.get_postfinance_other_reference() %}
         <OTHER-REFERENCE Type="{{ ref.type }}">
           <REFERENCE-DATE>

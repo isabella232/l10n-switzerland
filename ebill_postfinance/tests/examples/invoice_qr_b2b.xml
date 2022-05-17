@@ -40,12 +40,12 @@
             <Date Format="CCYYMMDD">20190601</Date>
           </REFERENCE-DATE>
         </ORDER>
-        <!-- <DELIVERY-NOTE> -->
-          <!-- <REFERENCE-DATE> -->
-            <!-- <Reference-No>Picking Name</Reference-No> -->
-            <!-- <Date Format="CCYYMMDD">20190620</Date> -->
-          <!-- </REFERENCE-DATE> -->
-        <!-- </DELIVERY-NOTE> -->
+        <DELIVERY-NOTE>
+          <REFERENCE-DATE>
+            <Reference-No>Picking Name</Reference-No>
+            <Date Format="CCYYMMDD">20190621</Date>
+          </REFERENCE-DATE>
+        </DELIVERY-NOTE>
       </REFERENCE>
       <BILLER>
         <Tax-No>CHE-012.345.678</Tax-No>

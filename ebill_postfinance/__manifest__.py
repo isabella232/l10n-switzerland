@@ -16,7 +16,7 @@
         "l10n_ch_qriban",
         "queue_job",
         "sale",
-        # "delivery",
+        "sale_stock",
     ],
     "external_dependencies": {"python": ["zeep"]},
     "data": [
