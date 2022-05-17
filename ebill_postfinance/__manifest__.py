@@ -19,8 +19,14 @@
         "sale",
         "sale_stock",
     ],
-    "external_dependencies": {"python": ["zeep"]},
+    "external_dependencies": {
+        "python": [
+            "zeep",
+            "ebilling_postfinance",
+        ]
+    },
     "data": [
+        "data/ir_cron.xml",
         "data/transmit.method.xml",
         "data/mail_activity_type.xml",
         "security/ir.model.access.csv",

@@ -4,37 +4,13 @@
 import logging
 import logging.config
 
-from odoo import fields, models
+# from ..ebilling_postfinance.ebilling_postfinance import ebilling_postfinance
+from ebilling_postfinance import ebilling_postfinance
+
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
-from ..einvoicing_postfinance.einvoicing_postfinance import einvoicing_postfinance
-
 _logger = logging.getLogger(__name__)
-
-# Setup debug logging for Zeep
-# TODO: logging does not work with Odoo, it disable all other logs
-# logging.config.dictConfig({
-#     'version': 1,
-#     'formatters': {
-#         'verbose': {
-#             'format': '%(name)s: %(message)s'
-#         }
-#     },
-#     'handlers': {
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'verbose',
-#         },
-#     },
-#     'loggers': {
-#         'zeep.transports': {
-#             'level': 'DEBUG',
-#             'propagate': True,
-#             'handlers': ['console'],
-#         },
-#     }
-# })
 
 
 class EbillPostfinanceService(models.Model):
@@ -80,7 +56,7 @@ class EbillPostfinanceService(models.Model):
     )
 
     def _get_service(self):
-        return einvoicing_postfinance.EbillService(
+        return ebilling_postfinance.WebService(
             self.use_test_service,
             self.username,
             self.password,
@@ -164,3 +140,9 @@ class EbillPostfinanceService(models.Model):
         service = self._get_service()
         res = service.get_registration_protocol(create_date, archive_data)
         return res
+
+    @api.model
+    def cron_update_invoices(self):
+        services = self.search([])
+        for service in services:
+            service.search_invoice()

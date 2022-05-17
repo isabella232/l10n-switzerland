@@ -16,26 +16,20 @@
         />
         <field name="arch" type="xml">
             <group name="main" position="after">
-                <group name="postfinance">
-                    <field
-                        name="postfinance_service_id"
-                        attrs="{'invisible': [('is_postfinance_contract', '=', False)]}"
-                    />
-                    <field
-                        name="postfinance_account_number"
-                        attrs="{'invisible': [('is_postfinance_contract', '=', False)]}"
-                    />
-                    <!-- <field -->
-                    <!--     name="payment_type" -->
-                    <!--     attrs="{'invisible': [('is_postfinance_contract', '=', False)]}" -->
-                    <!-- /> -->
+                <group
+                    name="postfinance"
+                    string="Postfinance"
+                    attrs="{'invisible': [('is_postfinance_contract', '=', False)]}"
+                >
+                    <field name="postfinance_service_id" />
+                    <field name="postfinance_billerid" />
+                    <field name="payment_type" />
                     <field name="is_postfinance_contract" invisible="1" />
                     <field name="is_postfinance_method_on_partner" invisible="1" />
                 </group>
             </group>
 
             <group name="main" position="before">
-              <!-- TODO could be added to base_ebill_payment_contract module -->
               <div class="oe_button_box" name="button_box">
                 <button
                         name="set_postfinance_method_on_partner"
