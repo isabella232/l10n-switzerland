@@ -17,7 +17,9 @@ TEST_WSDL = os.path.join(FILE_PATH, "wsdl", "b2bservice_inte.wsdl")
 
 
 class EbillService:
-    def __init__(self, test_service, username, password, biller_id):
+    def __init__(
+        self, test_service, username, password, biller_id, operation_timeout=None
+    ):
         self.use_test_service = True
         settings = zeep.Settings(xml_huge_tree=True)
         session = requests.Session()
@@ -29,7 +31,9 @@ class EbillService:
             wsdl_doc = PROD_WSDL
             session.verify = PROD_CERT
             url = PROD_URL
-        transport = zeep.transports.Transport(session=session)
+        transport = zeep.transports.Transport(
+            session=session, operation_timeout=operation_timeout
+        )
         self.client = zeep.Client(
             wsdl_doc,
             transport=transport,

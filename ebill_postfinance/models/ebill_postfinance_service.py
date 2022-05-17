@@ -73,10 +73,19 @@ class EbillPostfinanceService(models.Model):
             ("struct.pdf", "Factur X"),
         ],
     )
+    operation_timeout = fields.Integer(
+        string="HTTP Timeout",
+        default="600",
+        help="Timeout for each HTTP (GET, POST) request in seconds.",
+    )
 
     def _get_service(self):
         return einvoicing_postfinance.EbillService(
-            self.use_test_service, self.username, self.password, self.biller_id
+            self.use_test_service,
+            self.username,
+            self.password,
+            self.biller_id,
+            self.operation_timeout,
         )
 
     def test_ping(self):
