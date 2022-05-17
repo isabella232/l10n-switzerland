@@ -11,31 +11,6 @@ from ..einvoicing_postfinance.einvoicing_postfinance import einvoicing_postfinan
 
 _logger = logging.getLogger(__name__)
 
-# Setup debug logging for Zeep
-# TODO: logging does not work with Odoo, it disable all other logs
-# logging.config.dictConfig({
-#     'version': 1,
-#     'formatters': {
-#         'verbose': {
-#             'format': '%(name)s: %(message)s'
-#         }
-#     },
-#     'handlers': {
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'verbose',
-#         },
-#     },
-#     'loggers': {
-#         'zeep.transports': {
-#             'level': 'DEBUG',
-#             'propagate': True,
-#             'handlers': ['console'],
-#         },
-#     }
-# })
-
 
 class EbillPostfinanceService(models.Model):
     _name = "ebill.postfinance.service"

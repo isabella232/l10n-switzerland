@@ -1,6 +1,7 @@
-# Copyright 2019 Camptocamp SA
+# Copyright 2019-2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 import os
 from datetime import datetime
 
@@ -12,8 +13,9 @@ from odoo.modules.module import get_module_root
 
 from odoo.addons.base.models.res_bank import sanitize_account_number
 
+_logger = logging.getLogger(__name__)
+
 MODULE_PATH = get_module_root(os.path.dirname(__file__))
-# INVOICE_TEMPLATE_2013 = "invoice-2013A.xml"
 INVOICE_TEMPLATE_2003 = "invoice-2003A.jinja"
 TEMPLATE_DIR = [MODULE_PATH + "/messages"]
 
@@ -107,7 +109,6 @@ class EbillPostfinanceInvoiceMessage(models.Model):
                 }
         """
         self.ensure_one()
-        # TODO check transaction id are the same
         self.server_state = data.State.lower()
         self.server_reason_code = data.ReasonCode
         self.server_reason_text = data.ReasonText
@@ -141,16 +142,15 @@ class EbillPostfinanceInvoiceMessage(models.Model):
                     message.state = "sent"
                     submit_date_utc = response.SubmitDate.astimezone(pytz.utc)
                     message.submitted_on = submit_date_utc.replace(tzinfo=None)
-                    message.response = response  # Probably not needed anymore
+                    message.response = response
                 else:
                     message.state = "error"
                     message.server_reason_code = "NOK"
                     message.server_reason_text = "Could not be sent to sftp"
-            # except zeep.exceptions.Fault as e:
-            except Exception:
-                # message.response = PayNetDWS.handle_fault(e)
-                message.response = "TODO get error message from response if any."
+            except Exception as ex:
+                message.response = "Exception sending to Postfinance"
                 message.state = "error"
+                raise ex
 
     @staticmethod
     def format_date(date_string=None):

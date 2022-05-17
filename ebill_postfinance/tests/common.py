@@ -82,7 +82,7 @@ class CommonCase(SavepointCase):
         cls.contract = cls.env["ebill.payment.contract"].create(
             {
                 "partner_id": cls.customer.id,
-                "postfinance_account_number": "41010198248040391",
+                "postfinance_billerid": "41010198248040391",
                 "state": "open",
                 "postfinance_service_id": cls.service.id,
             }

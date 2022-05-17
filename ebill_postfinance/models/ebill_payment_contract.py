@@ -8,8 +8,7 @@ from odoo.exceptions import ValidationError
 class EbillPaymentContract(models.Model):
     _inherit = "ebill.payment.contract"
 
-    # TODO rename into postfinance_billerid
-    postfinance_account_number = fields.Char(string="Postfinance Account ID", size=20)
+    postfinance_billerid = fields.Char(string="Postfinance Biller ID", size=20)
     is_postfinance_contract = fields.Boolean(
         compute="_compute_is_postfinance_contract", store=False
     )
@@ -51,12 +50,12 @@ class EbillPaymentContract(models.Model):
             if record.partner_id:
                 record.partner_id.customer_invoice_transmit_method_id = transmit_method
 
-    @api.constrains("transmit_method_id", "postfinance_account_number")
-    def _check_postfinance_account_id(self):
+    @api.constrains("transmit_method_id", "postfinance_billerid")
+    def _check_postfinance_biller_id(self):
         for contract in self:
             if not contract.is_postfinance_contract:
                 continue
-            if not contract.postfinance_account_number:
+            if not contract.postfinance_billerid:
                 raise ValidationError(
                     _(
                         "The Postfinacnce Account ID is required for a Postfinance contract."

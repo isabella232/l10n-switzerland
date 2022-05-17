@@ -22,13 +22,13 @@
                         attrs="{'invisible': [('is_postfinance_contract', '=', False)]}"
                     />
                     <field
-                        name="postfinance_account_number"
+                        name="postfinance_billerid"
                         attrs="{'invisible': [('is_postfinance_contract', '=', False)]}"
                     />
-                    <!-- <field -->
-                    <!--     name="payment_type" -->
-                    <!--     attrs="{'invisible': [('is_postfinance_contract', '=', False)]}" -->
-                    <!-- /> -->
+                    <field
+                        name="payment_type"
+                        attrs="{'invisible': [('is_postfinance_contract', '=', False)]}"
+                    />
                     <field name="is_postfinance_contract" invisible="1" />
                     <field name="is_postfinance_method_on_partner" invisible="1" />
                 </group>

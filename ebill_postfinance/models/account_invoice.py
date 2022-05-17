@@ -12,7 +12,7 @@ from odoo.tools.pdf import merge_pdf
 _logger = logging.getLogger(__name__)
 
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
 
     _inherit = "account.move"
 
@@ -49,14 +49,13 @@ class AccountInvoice(models.Model):
         contract = self.partner_id.get_active_contract(self.transmit_method_id)
         if not contract:
             return
-        # TODO Fix empty attachment for now
         # Generate PDf to be send
         pdf_data = []
         report_names = ["account.report_invoice"]
-        # if contract.payment_type == "qr":
-        #     report_names.append("l10n_ch.qr_report_main")
-        # elif contract.payment_type == "isr":
-        #     report_names.append("l10n_ch.isr_report_main")
+        if contract.payment_type == "qr":
+            report_names.append("l10n_ch.qr_report_main")
+        elif contract.payment_type == "isr":
+            report_names.append("l10n_ch.isr_report_main")
         for report_name in report_names:
             r = self.env["ir.actions.report"]._get_report_from_name(report_name)
             pdf_content, _ = r._render([self.id])
@@ -66,12 +65,11 @@ class AccountInvoice(models.Model):
         else:
             # When test are run, pdf are not generated, so use an empty pdf
             pdf = b""
-
         message = self.env["ebill.postfinance.invoice.message"].create(
             {
                 "service_id": contract.postfinance_service_id.id,
                 "invoice_id": self.id,
-                "ebill_account_number": contract.postfinance_account_number,
+                "ebill_account_number": contract.postfinance_billerid,
                 "payment_type": contract.payment_type,
                 "ebill_payment_contract_id": contract.id,
             }
