@@ -8,13 +8,13 @@ from odoo.exceptions import ValidationError
 class EbillPaymentContract(models.Model):
     _inherit = "ebill.payment.contract"
 
-    postfinance_billerid = fields.Char(string="Postfinance Biller ID", size=20)
+    postfinance_billerid = fields.Char(string="Biller ID", size=20)
     is_postfinance_contract = fields.Boolean(
         compute="_compute_is_postfinance_contract", store=False
     )
     postfinance_service_id = fields.Many2one(
         comodel_name="ebill.postfinance.service",
-        string="Postfinance Service",
+        string="Service Name",
         ondelete="restrict",
     )
     is_postfinance_method_on_partner = fields.Boolean(
