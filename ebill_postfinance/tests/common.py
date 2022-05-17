@@ -113,7 +113,7 @@ class CommonCase(SavepointCase):
             }
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Product One", "list_price": 100.00, "default_code": "370003021"}
+            {"name": "Product Q & A", "list_price": 100.00, "default_code": "370003021"}
         )
         cls.product_long_name = cls.env["product.product"].create(
             {

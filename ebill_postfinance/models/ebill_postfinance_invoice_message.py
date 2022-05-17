@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 
 import pytz
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader
 
 from odoo import _, fields, models
 from odoo.modules.module import get_module_root
@@ -14,7 +14,7 @@ from odoo.addons.base.models.res_bank import sanitize_account_number
 
 MODULE_PATH = get_module_root(os.path.dirname(__file__))
 # INVOICE_TEMPLATE_2013 = "invoice-2013A.xml"
-INVOICE_TEMPLATE_2003 = "invoice-2003A.xml"
+INVOICE_TEMPLATE_2003 = "invoice-2003A.jinja"
 TEMPLATE_DIR = [MODULE_PATH + "/messages"]
 
 DOCUMENT_TYPE = {"out_invoice": "EFD", "out_refund": "EGS"}
@@ -136,12 +136,6 @@ class EbillPostfinanceInvoiceMessage(models.Model):
                 res = message.service_id.upload_file(
                     message.transaction_id, message.file_type_used, data
                 )
-                # [{
-                # 'FileType': 'XML',
-                # 'SubmitDate': datetime.datetime(2022, 4, 29, 15, 55, 59, 905553, tzinfo=<FixedOffset '+02:00'>),
-                # 'TransactionID': 'INV_2022_04_0001_2022_04_29_13_55_xml',
-                # 'ProcessingState': 'OK'
-                # }]
                 response = res[0]
                 if response.ProcessingState == "OK":
                     message.state = "sent"
@@ -233,7 +227,7 @@ class EbillPostfinanceInvoiceMessage(models.Model):
     def _get_jinja_env(self, template_dir):
         jinja_env = Environment(
             loader=FileSystemLoader(template_dir),
-            autoescape=select_autoescape(["xml"]),
+            autoescape=True,
         )
         # Force the truncate filter to be exact
         jinja_env.policies["truncate.leeway"] = 0
