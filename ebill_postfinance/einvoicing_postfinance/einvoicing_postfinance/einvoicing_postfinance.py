@@ -74,6 +74,13 @@ class EbillService:
         res = self.service.SearchInvoices(Parameter=parameters)
         return res
 
+    def initiate_ebill_recipient_subscription(self, recipient_email):
+        res = self.service.InitiateEBillRecipientSubscription(
+            BillerID=self.biller_id,
+            SubscriptionInitiationEmailAddress=recipient_email,
+        )
+        return res
+
     def get_ebill_recipient_subscription_status(self, recipient_id):
         res = self.service.GetEBillRecipientSubscriptionStatus(
             BillerID=self.biller_id,
