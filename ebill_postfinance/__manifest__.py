@@ -19,7 +19,7 @@
         "sale",
         "sale_stock",
     ],
-    "external_dependencies": {"python": ["zeep"]},
+    "external_dependencies": {"python": ["zeep", "git+https://github.com/TDu/ebilling_postfinance.git@dev#egg=ebilling_postfinance"]},
     "data": [
         "data/transmit.method.xml",
         "data/mail_activity_type.xml",
