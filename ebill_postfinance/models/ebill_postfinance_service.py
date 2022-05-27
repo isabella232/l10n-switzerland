@@ -4,11 +4,11 @@
 import logging
 import logging.config
 
-from odoo import fields, models
-from odoo.exceptions import UserError
-
 # from ..ebilling_postfinance.ebilling_postfinance import ebilling_postfinance
 from ebilling_postfinance import ebilling_postfinance
+
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -140,3 +140,9 @@ class EbillPostfinanceService(models.Model):
         service = self._get_service()
         res = service.get_registration_protocol(create_date, archive_data)
         return res
+
+    @api.model
+    def cron_update_invoices(self):
+        services = self.search([])
+        for service in services:
+            service.search_invoice()
